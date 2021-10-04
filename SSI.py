@@ -96,7 +96,7 @@ if st.button('Predict'):
     st.markdown('## Risk grouping for SSI:  '+str(result))
     if result == 'Low Risk':
         st.balloons()
-    st.markdown('## Probability of SSI:  '+str(prob)+'%')
+    st.markdown('## Probability of risk groups:  '+str(prob)+'%')
 #st.markdown('## The risk of bone metastases is '+str(prob/0.0078*1000//1/1000)+' times higher than the average risk .')
 
 #排版占行
