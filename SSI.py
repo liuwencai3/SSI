@@ -37,7 +37,7 @@ st.sidebar.markdown('## Variables')
 #Diameter_G = st.sidebar.selectbox('Diameter.G',('<5cm','5-10cm','>10cm'),index=0)
 #T = st.sidebar.selectbox("T stage",('T1','T2','T3','TX'))
 #M = st.sidebar.selectbox("M stage",('M0','M1'))
-diabetes = st.sidebar.selectbox("Diabetes",('No','Yes'),index=0)
+#diabetes = st.sidebar.selectbox("Diabetes",('No','Yes'),index=0)
 segments = st.sidebar.selectbox("Number of fused segments",('1','2','3','4','5'),index=0)
 surgical_procedure = st.sidebar.selectbox("Surgical procedure",('Plif','Tlif'),index=0)
 surgical_duration = st.sidebar.slider("Surgical duration", 0, 600, value=300, step=5)
@@ -53,7 +53,7 @@ map = {'1':1,'2':2,'3':3,'4':4,'5':5,'No':0,'Yes':1,'Plif':1,'Tlif':2}
 #map = {'White':0,'Black':1,'Other':2,'T1':0,'T2':1,'T3':2,'TX':3,'M0':0,'M1':1,'NX':2,'No':0,'Yes':1,}
 #Age =map[Age]
 
-diabetes =map[diabetes]
+#diabetes =map[diabetes]
 segments =map[segments]
 surgical_procedure =map[surgical_procedure]
 #steatosis =map[steatosis]
