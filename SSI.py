@@ -82,8 +82,8 @@ XGB.fit(X_ros, y_ros)
 
 sp = 0.5
 #figure
-is_t = (XGB.predict_proba(np.array([[diabetes,segments,surgical_procedure,surgical_duration,blood_loss]]))[0][1])> sp
-prob = (XGB.predict_proba(np.array([[diabetes,segments,surgical_procedure,surgical_duration,blood_loss]]))[0][1])*1000//1/10
+is_t = (XGB.predict_proba(np.array([[segments,surgical_procedure,surgical_duration,blood_loss]]))[0][1])> sp
+prob = (XGB.predict_proba(np.array([[segments,surgical_procedure,surgical_duration,blood_loss]]))[0][1])*1000//1/10
 
 #st.write('is_t:',is_t,'prob is ',prob)
 #st.markdown('## is_t:'+' '+str(is_t)+' prob is:'+' '+str(prob))
