@@ -59,8 +59,8 @@ map = {'1':1,'2':2,'3':3,'4':4,'5':5,'No':0,'Yes':1,'Plif':1,'Tlif':2}
 #Age =map[Age]
 
 #diabetes =map[diabetes]
-segments =map[segments]
-surgical_procedure =map[surgical_procedure]
+Segments =map[Segments]
+Surgical_procedure =map[Surgical_procedure]
 Diabetes = map[Diabetes]
 Hypertension = map[Hypertension]
 Previous_spinal_surgery = map[Previous_spinal_surgery]
