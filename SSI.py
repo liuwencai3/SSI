@@ -38,10 +38,15 @@ st.sidebar.markdown('## Variables')
 #T = st.sidebar.selectbox("T stage",('T1','T2','T3','TX'))
 #M = st.sidebar.selectbox("M stage",('M0','M1'))
 #diabetes = st.sidebar.selectbox("Diabetes",('No','Yes'),index=0)
-segments = st.sidebar.selectbox("Number of fused segments",('1','2','3','4','5'),index=0)
-surgical_procedure = st.sidebar.selectbox("Surgical procedure",('Plif','Tlif'),index=0)
-surgical_duration = st.sidebar.slider("Surgical duration", 0, 600, value=300, step=5)
-blood_loss = st.sidebar.slider("Blood loss", 0, 2500, value=400, step=50)
+Age = st.sidebar.slider("Age", 1, 99, value=55, step=1)
+Diabetes = st.sidebar.selectbox("Diabetes",('No','Yes'))
+Hypertension = st.sidebar.selectbox("Hypertension",('No','Yes'))
+BMI = st.sidebar.slider("BMI", 15, 35, value=22.0, step=0.1)
+Segments = st.sidebar.selectbox("Number of fused segments",('1','2','3','4','5'),index=0)
+Previous_spinal_surgery  = st.sidebar.selectbox("Previous spinal surgery",('No','Yes'))
+Surgical_procedure = st.sidebar.selectbox("Surgical procedure",('Plif','Tlif'),index=0)
+Surgical_duration = st.sidebar.slider("Surgical duration", 0, 600, value=300, step=5)
+Blood_loss = st.sidebar.slider("Blood loss", 0, 2500, value=400, step=50)
 #steatosis = st.sidebar.selectbox("Steatosis",('No','Yes'),index=0)
 #Bone_metastases = st.sidebar.selectbox("Bone metastases",('No','Yes'))
 #Lung_metastases = st.sidebar.selectbox("Lung metastases",('No','Yes'))
@@ -56,6 +61,9 @@ map = {'1':1,'2':2,'3':3,'4':4,'5':5,'No':0,'Yes':1,'Plif':1,'Tlif':2}
 #diabetes =map[diabetes]
 segments =map[segments]
 surgical_procedure =map[surgical_procedure]
+Diabetes = map[Diabetes]
+Hypertension = map[Hypertension]
+Previous_spinal_surgery = map[Previous_spinal_surgery]
 #steatosis =map[steatosis]
 #Radiation =map[Radiation]
 #Chemotherapy =map[Chemotherapy]
@@ -64,17 +72,17 @@ surgical_procedure =map[surgical_procedure]
 
 # 数据读取，特征标注
 thyroid_train = pd.read_csv('train.csv', low_memory=False)
-thyroid_train['infection'] = thyroid_train['infection'].apply(lambda x : +1 if x==1 else 0)
+thyroid_train['Infection'] = thyroid_train['Infection'].apply(lambda x : +1 if x==1 else 0)
 #thyroid_test = pd.read_csv('test1.csv', low_memory=False)
 #thyroid_test['infection'] = thyroid_test['infection'].apply(lambda x : +1 if x==1 else 0)
 #features = ['T','N','Sex','surgery','Bone.metastases','Radiation']
-features = ['diabetes','segments','surgical_procedure','surgical_duration','blood_loss']#
-target = 'infection'
+features = ['Age','Diabetes','Hypertension','BMI','Previous_spinal_surgery','Segments','Surgical_procedure','Surgical_duration','Blood_loss']#
+target = 'Infection'
 #处理数据不平衡
 ros = RandomOverSampler(random_state=12, sampling_strategy='auto')
 X_ros, y_ros = ros.fit_resample(thyroid_train[features], thyroid_train[target])
 
-XGB = XGBClassifier(random_state=32,max_depth=7,n_estimators=98)
+XGB = XGBClassifier(random_state=32,max_depth=5,n_estimators=98)
 XGB.fit(X_ros, y_ros)
 #RF = sklearn.ensemble.RandomForestClassifier(n_estimators=4,criterion='entropy',max_features='log2',max_depth=3,random_state=12)
 #RF.fit(X_ros, y_ros)
@@ -82,8 +90,8 @@ XGB.fit(X_ros, y_ros)
 
 sp = 0.5
 #figure
-is_t = (XGB.predict_proba(np.array([[segments,surgical_procedure,surgical_duration,blood_loss]]))[0][1])> sp
-prob = (XGB.predict_proba(np.array([[segments,surgical_procedure,surgical_duration,blood_loss]]))[0][1])*1000//1/10
+is_t = (XGB.predict_proba(np.array([[Age,Diabetes,Hypertension,BMI,Previous_spinal_surgery,Segments,Surgical_procedure,Surgical_duration,Blood_loss]]))[0][1])> sp
+prob = (XGB.predict_proba(np.array([[Age,Diabetes,Hypertension,BMI,Previous_spinal_surgery,Segments,Surgical_procedure,Surgical_duration,Blood_loss]]))[0][1])*1000//1/10
 
 #st.write('is_t:',is_t,'prob is ',prob)
 #st.markdown('## is_t:'+' '+str(is_t)+' prob is:'+' '+str(prob))
