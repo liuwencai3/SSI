@@ -82,7 +82,7 @@ target = 'Infection'
 ros = RandomOverSampler(random_state=12, sampling_strategy='auto')
 X_ros, y_ros = ros.fit_resample(thyroid_train[features], thyroid_train[target])
 
-XGB = XGBClassifier(random_state=32,max_depth=5,n_estimators=98)
+XGB = XGBClassifier(random_state=32,max_depth=3,n_estimators=32)
 XGB.fit(X_ros, y_ros)
 #RF = sklearn.ensemble.RandomForestClassifier(n_estimators=4,criterion='entropy',max_features='log2',max_depth=3,random_state=12)
 #RF.fit(X_ros, y_ros)
